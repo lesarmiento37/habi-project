@@ -1,0 +1,31 @@
+stages:
+  - validate
+  - deploy
+  - destroy
+
+validate:
+  stage: validate
+  script:
+    - terraform fmt -check
+    - terraform validate
+  tags:
+    - terraform
+
+deploy:
+  stage: deploy
+  script:
+    - terraform init
+    - terraform apply -auto-approve
+    - zip -r lambda_write_sqs.zip lambda_write_sqs/
+    - zip -r lambda_write_rds.zip lambda_write_rds/
+    - terraform apply -auto-approve
+  tags:
+    - terraform
+
+destroy:
+  stage: destroy
+  script:
+    - ./terraform_destroy.sh
+  tags:
+    - terraform
+  when: always

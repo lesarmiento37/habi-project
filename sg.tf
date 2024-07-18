@@ -1,8 +1,8 @@
 resource "aws_security_group" "aurora" {
   name_prefix = "${var.environment}-aurora-sg"
   ingress {
-    from_port = 5432
-    to_port   = 5432
+    from_port = 3306
+    to_port   = 3306
     protocol  = "tcp"
     cidr_blocks = [var.aurora_cidr]
   }
@@ -10,7 +10,7 @@ resource "aws_security_group" "aurora" {
     from_port = "0"
     to_port   = "0"
     protocol  = "-1"
-    cidr_blocks = ["192.168.3.0/24"]
+    cidr_blocks = ["0.0.0.0/0"]
     self      = "true"
   }
 
