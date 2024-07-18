@@ -13,10 +13,11 @@ This project, habi-project, involves creating a comprehensive infrastructure usi
 ## Components:
 ### Aurora Cluster
 
- * Three instances
+ * Three instances (This number is for example purposes, can be changed)
  * One endpoint
  * Related security groups
  * VPC access only
+ * Autoscale for read replicas
  
 ### CloudWatch Alarms
 
