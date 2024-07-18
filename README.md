@@ -8,38 +8,8 @@ This project demonstrates the setup of an AWS architecture using Terraform, incl
 
 ### Lambda and SQS Architecture
 
-```plaintext
-          +---------------------+            +--------------------+            +---------------------+
-          |  EventBridge Rule   |  ------->  |   Lambda (SQS)     |  ------->  |       SQS Queue     |
-          +---------------------+            +--------------------+            +---------------------+
-                                                          |                                    |
-                                                          |                                    |
-                                                          v                                    v
-                                            +---------------------+            +---------------------+
-                                            | Lambda (RDS Writer) |  <-------  |     Aurora Cluster  |
-                                            +---------------------+            +---------------------+
+![image](https://github.com/user-attachments/assets/fc63bdab-c8f0-49c6-9cfe-17ef5a2ca83d)
 
-          +-------------------------------------+
-          |          AWS Cloud                  |
-          |                                     |
-          |  +------------------------------+   |
-          |  |     VPC                      |   |
-          |  |  +-----------------------+   |   |
-          |  |  |   Aurora Cluster      |   |   |
-          |  |  |                       |   |   |
-          |  |  |  +----------------+   |   |   |
-          |  |  |  |  Instance 1    |   |   |   |
-          |  |  |  +----------------+   |   |   |
-          |  |  |  +----------------+   |   |   |
-          |  |  |  |  Instance 2    |   |   |   |
-          |  |  |  +----------------+   |   |   |
-          |  |  |  +----------------+   |   |   |
-          |  |  |  |  Instance 3    |   |   |   |
-          |  |  |  +----------------+   |   |   |
-          |  |  +-----------------------+   |   |
-          |  +------------------------------+   |
-          +-------------------------------------+
-```       
 # Prerequisites
 Terraform 0.12+
 AWS CLI configured with appropriate permissions
