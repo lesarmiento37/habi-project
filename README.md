@@ -1,8 +1,45 @@
 # habi-project
 habi-project
-# AWS Architecture with Terraform
+# Overview
+This project, habi-project, involves creating a comprehensive infrastructure using Terraform. The main components of this infrastructure are:
 
-This project demonstrates the setup of an AWS architecture using Terraform, including two Lambda functions, an SQS queue, an RDS MySQL database, and an Aurora cluster.
+## Aurora cluster with three instances
+   * One endpoint
+   * Related security groups
+   * VPC access only
+   * Dynamic Aurora Domain
+   * The infrastructure includes a dynamic Aurora domain created by setting various parameters such as instance numbers. This allows for flexible and scalable database configurations.
+
+## Components:
+### Aurora Cluster
+
+ * Three instances
+ * One endpoint
+ * Related security groups
+ * VPC access only
+ 
+### CloudWatch Alarms
+
+  * Alarms related to the database, also created in Terraform.
+  
+## SQS Queue and Lambda Functions
+   The infrastructure also includes the creation of an SQS queue and the required Lambda functions to process events.
+
+### Lambda Functions:
+   #### Lambda Write SQS (lambda_write_sqs)
+   * Triggered by an EventBridge daily-based event.
+   * Purpose: Once triggered, it sends an event to the SQS queue.
+     
+### Lambda Write RDS (lambda_write_rds)
+
+* Triggered by the SQS queue.
+* Purpose: Takes the event from the SQS queue and writes to the Aurora cluster.
+
+## Environment Variables Management
+* The environment variables are configured using a tool called SOPS.
+* SOPS is used to manage versions of sensitive variables, such as the database password.
+* Variables can only be read if the user has permissions to Secrets Manager.
+
 
 ## Architecture Diagram
 
