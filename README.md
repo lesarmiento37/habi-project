@@ -39,8 +39,8 @@ This project demonstrates the setup of an AWS architecture using Terraform, incl
           |  |  +-----------------------+   |   |
           |  +------------------------------+   |
           +-------------------------------------+
-          
-#Prerequisites
+```       
+# Prerequisites
 Terraform 0.12+
 AWS CLI configured with appropriate permissions
 An existing VPC with subnets and security groups
