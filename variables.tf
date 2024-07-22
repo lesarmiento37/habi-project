@@ -5,7 +5,7 @@ variable "environment" {
 
 variable "cluster_name" {
   description = "Cluster name"
-  default     = "haby-cluster"
+  default     = "habi-cluster"
 }
 
 variable "db_subnets" {
