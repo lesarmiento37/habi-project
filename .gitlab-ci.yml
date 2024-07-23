@@ -15,7 +15,6 @@ deploy:
   stage: deploy
   script:
     - terraform init
-    - terraform apply -auto-approve
     - zip -r lambda_write_sqs.zip lambda_write_sqs/
     - zip -r lambda_write_rds.zip lambda_write_rds/
     - terraform apply -auto-approve

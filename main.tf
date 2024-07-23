@@ -75,6 +75,31 @@ resource "aws_iam_role" "lambda_exec" {
   })
 }
 
+data "aws_iam_policy_document" "lambda_policy_lambda_sqs_sm" {
+  statement {
+    actions = [
+      "secretsmanager:GetSecretValue",
+      "sqs:SendMessage",
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes"
+    ]
+    resources = [
+      "*"
+    ]
+  }
+}
+
+resource "aws_iam_policy" "lambda_policy_lambda_sqs_sm" {
+  name   = "lambda_policy"
+  policy = data.aws_iam_policy_document.lambda_policy_lambda_sqs_sm.json
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_sm_sqs_execution" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = aws_iam_policy.lambda_policy_lambda_sqs_sm
+}
+
 resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   role       = aws_iam_role.lambda_exec.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
